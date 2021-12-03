@@ -7,7 +7,9 @@ app.get("/current-time", function (req, res) {
 });
 
 app.get("/", function (req, res) {
-  res.send("<h1>Hello World!</h1>");
+  res.send(
+    '<form action="/store-user" method="POST"><label>Your Name </label><input type="text"><button>Submit</button></form>'
+  );
 });
 
 app.listen(3000);
