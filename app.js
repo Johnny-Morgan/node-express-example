@@ -18,13 +18,17 @@ app.get("/", function (req, res) {
   );
 });
 
+function getExistingUsers() {
+  const filePath = path.join(__dirname, "data", "users.json");
+  const fileData = fs.readFileSync(filePath);
+  const existingUsers = JSON.parse(fileData);
+  return existingUsers;
+}
+
 app.post("/store-user", function (req, res) {
   const userName = req.body.username;
 
-  const filePath = path.join(__dirname, "data", "users.json");
-
-  const fileData = fs.readFileSync(filePath);
-  const existingUsers = JSON.parse(fileData);
+  const existingUsers = getExistingUsers();
 
   existingUsers.push(userName);
 
@@ -34,10 +38,7 @@ app.post("/store-user", function (req, res) {
 });
 
 app.get("/users", function (req, res) {
-  const filePath = path.join(__dirname, "data", "users.json");
-
-  const fileData = fs.readFileSync(filePath);
-  const existingUsers = JSON.parse(fileData);
+  const existingUsers = getExistingUsers();
 
   let responseData = "<ul>";
   for (const user of existingUsers) {
