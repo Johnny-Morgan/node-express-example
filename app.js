@@ -2,6 +2,8 @@ const express = require("express");
 
 const app = express();
 
+app.use(express.urlencoded({ extended: false }));
+
 app.get("/current-time", function (req, res) {
   res.send("<h1>" + new Date().toDateString() + "</h1>");
 });
@@ -13,8 +15,8 @@ app.get("/", function (req, res) {
 });
 
 app.post("/store-user", function (req, res) {
-  const username = req.body.username;
-  console.log(username);
+  const userName = req.body.username;
+  console.log(userName);
   res.send("<h1>Username stored!</h1>");
 });
 
